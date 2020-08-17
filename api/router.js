@@ -1,12 +1,9 @@
 "use strict";
 module.exports = function (app) {
-  let productsCtrl = require("./controller/productController");
+  let api = require("./model/controls");
 
   // todoList Routes
-  app.route("/products").get(productsCtrl.get).post(productsCtrl.store);
-  app
-    .route("/products/:productId")
-    .get(productsCtrl.detail)
-    .put(productsCtrl.update)
-    .delete(productsCtrl.delete);
+  app.route("/info").get(api.get);
+  app.route("/create").post(api.create);
+  app.route("/add_fake").put(api.add);
 };
