@@ -13,4 +13,4 @@ app.use(function (req, res) {
 cronjob.addFakeMail();
 app.listen(port);
 
-console.log("RESTful API server started on: ");
+console.log("RESTful API server started on: " + port);
