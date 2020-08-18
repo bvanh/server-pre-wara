@@ -6,7 +6,7 @@ const db = mysql.createConnection({
   user: process.env.DB_USER || "vietanh",
   password: process.env.DB_PASS || "clappi1004##",
   database: process.env.DB_NAME || "pre_wara",
-  // port: "3307",
+  port: 3307,
 });
 db.connect((err) => {
   if (err) {
@@ -17,7 +17,7 @@ db.connect((err) => {
       console.error("Database has too many connections.");
     }
     if (err.code === "ECONNREFUSED") {
-      console.error(err.message,"Database connection was refused.");
+      console.error(err.message, "Database connection was refused.");
     }
   }
 });
