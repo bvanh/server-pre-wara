@@ -11,13 +11,13 @@ module.exports = {
     switch (isFake) {
       case true:
         db.query(fake_mail, (err, response) => {
-          if (err) res.send(err);
+          if (err) res.status(400).send(err);
           res.json(response[0]);
         });
         break;
       default:
         db.query(sql, (err, response) => {
-          if (err) res.send(err);
+          if (err) res.status(400).send(err);
           res.json({ currentMail: response[0].Cardinality });
         });
         break;
@@ -31,12 +31,12 @@ module.exports = {
       (err, response) => {
         if (err) {
           if (err.errno === 1062) {
-            res.json({
+            res.status(400).json({
               message: "Email đã tồn tại !",
               status: 400,
             });
           }
-          res.json({
+          res.status(400).json({
             message: "ERROR!",
             res: err,
             status: 400,
