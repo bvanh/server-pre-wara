@@ -20,6 +20,7 @@ db.connect((err) => {
       console.error(err.message, "Database connection was refused.");
     }
   }
+  console.log('db is connect!')
 });
 
 module.exports = db;
