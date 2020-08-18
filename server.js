@@ -1,7 +1,7 @@
 let express = require("express");
 let bodyparser = require("body-parser");
 let cronjob = require("./api/cronmail");
-let port = process.env.PORT || 9008;
+let port = process.env.PORT || 5005;
 const app = express();
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
@@ -11,6 +11,6 @@ app.use(function (req, res) {
   res.status(404).send({ url: req.originalUrl + " not found" });
 });
 cronjob.addFakeMail();
-app.listen(3000);
+app.listen(port);
 
 console.log("RESTful API server started on: ");
