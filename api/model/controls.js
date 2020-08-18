@@ -24,14 +24,30 @@ module.exports = {
     }
   },
   create: (req, res) => {
-    let data = req.body;
-    let sql = "INSERT INTO info_register SET ?";
-    db.query(sql, { ...data }, (err, response, results, fields) => {
-      if (err) {
-        res.status(400).send(err);
+    let { mail, phone } = req.body;
+    db.query(
+      "insert into info_register set ?",
+      { mail: mail, phone: phone },
+      (err, response) => {
+        if (err) {
+          if (err.errno === 1062) {
+            res.json({
+              message: "Email đã tồn tại !",
+              status: 400,
+            });
+          }
+          res.json({
+            message: "ERROR!",
+            res: err,
+            status: 400,
+          });
+        }
+        res.json({
+          message: "Gửi email thành công!",
+          status: 200,
+        });
       }
-      res.json({ message: "Insert success!", data: req.body, status: 200 });
-    });
+    );
   },
   // cong fake data
   add: (req, res) => {
@@ -40,7 +56,7 @@ module.exports = {
       if (err) {
         res.status(400).send(err);
       }
-      // res.json({ message: "add fake success!", response });
+      res.json({ message: "add fake success!", response });
     });
   },
 };
