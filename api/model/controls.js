@@ -12,7 +12,7 @@ module.exports = {
       case true:
         db.query(fake_mail, (err, response) => {
           if (err) res.send(err);
-          res.json(response[0]);
+          res.json(response);
         });
         break;
       default:
