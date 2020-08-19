@@ -2,7 +2,7 @@
 const util = require("util");
 const mysql = require("mysql");
 const db = require("../db");
-const isFake = false;
+const isFake = true;
 
 module.exports = {
   get: (req, res) => {
