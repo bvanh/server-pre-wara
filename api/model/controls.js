@@ -1,6 +1,7 @@
 "use strict";
-const util = require("util");
-const mysql = require("mysql");
+const redis = require("redis");
+const REDIS_PORT = process.env.PORT || 6379;
+const client = redis.createClient(REDIS_PORT);
 const db = require("../db");
 const isFake = true;
 
@@ -13,6 +14,7 @@ module.exports = {
         db.query(fake_mail, (err, response) => {
           if (err) res.status(400).send(err);
           res.send(response[0]);
+          client.setex('currentMail', 3600, JSON.stringify(response[0]));
         });
         break;
       default:
@@ -22,6 +24,16 @@ module.exports = {
         });
         break;
     }
+  },
+  cache: (req, res, next) => {
+    client.get("currentMail", (err, data) => {
+      if (err) throw err;
+      if (data !== null) {
+        res.send(JSON.parse(data));
+      } else {
+        next();
+      }
+    });
   },
   create: (req, res) => {
     let { mail, phone } = req.body;
