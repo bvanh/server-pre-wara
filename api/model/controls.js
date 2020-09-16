@@ -33,7 +33,7 @@ module.exports = {
         throw err;
       }
       if (data != null) {
-        res.send(JSON.parse(data));
+        res.send(data);
       } else {
         next();
       }
