@@ -16,14 +16,14 @@ module.exports = {
           if (err) res.status(400).send(err);
           console.log(response[0]);
           res.send(response[0]);
-          client.setex("currentMail", 1800, JSON.stringify(response[0]));
+          client.setex("currentMail", 900, JSON.stringify(response[0]));
         });
         break;
       default:
         db.query(sql, (err, response) => {
           if (err) res.status(400).send(err);
           res.json({ currentMail: response[0].Cardinality });
-          client.setex("currentMail", 1800, JSON.stringify(response[0].Cardinality));
+          client.setex("currentMail", 900, JSON.stringify(response[0].Cardinality));
         });
         break;
     }
