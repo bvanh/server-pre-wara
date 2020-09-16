@@ -6,15 +6,17 @@ const db = require("../db");
 const isFake = true;
 
 module.exports = {
-  get: (req, res) => {
+  get: (req, res, next) => {
     let sql = 'SHOW INDEXES FROM info_register WHERE Key_Name="PRIMARY"';
     let fake_mail = "SELECT currentMail from fake_info";
+    // checkCache(req, res, next);
     switch (isFake) {
       case true:
         db.query(fake_mail, (err, response) => {
           if (err) res.status(400).send(err);
+          console.log(response[0]);
           res.send(response[0]);
-          client.setex('currentMail', 3600, JSON.stringify(response[0]));
+          client.setex("currentMail", 1800, JSON.stringify(response[0]));
         });
         break;
       default:
@@ -25,10 +27,12 @@ module.exports = {
         break;
     }
   },
-  cache: (req, res, next) => {
+  checkCache: (req, res, next) => {
     client.get("currentMail", (err, data) => {
-      if (err) throw err;
-      if (data !== null) {
+      if (err) {
+        throw err;
+      }
+      if (data != null) {
         res.send(JSON.parse(data));
       } else {
         next();
