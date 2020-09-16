@@ -23,6 +23,7 @@ module.exports = {
         db.query(sql, (err, response) => {
           if (err) res.status(400).send(err);
           res.json({ currentMail: response[0].Cardinality });
+          client.setex("currentMail", 1800, JSON.stringify(response[0].Cardinality));
         });
         break;
     }
@@ -33,7 +34,7 @@ module.exports = {
         throw err;
       }
       if (data != null) {
-        res.send(data);
+        res.send(JSON.parse(data));
       } else {
         next();
       }
