@@ -73,7 +73,8 @@ module.exports = {
       if (err) {
         res.status(400).send(err);
       }
-      res.json({ message: "add fake success!", response });
+      console.log(response)
+      // res.json({ message: "add fake success!", response });
     });
   },
 };
