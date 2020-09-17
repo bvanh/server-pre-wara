@@ -68,7 +68,7 @@ module.exports = {
   },
   // cong fake data
   add: (req, res) => {
-    let sql = "UPDATE fake_info SET currentMail = currentMail + 1000";
+    let sql = "UPDATE fake_info SET currentMail = currentMail + 1";
     db.query(sql, (err, response) => {
       if (err) {
         res.status(400).send(err);
