@@ -8,5 +8,5 @@ module.exports = function (app) {
   // todoList Routes
   app.route("/create").post(api.create);
   app.route("/add_fake").put(api.add);
-  app.route("/info").get(api.checkCache, api.get);
+  app.route("/info").get(api.get);
 };
