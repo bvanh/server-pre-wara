@@ -14,7 +14,7 @@ module.exports = {
       case true:
         db.query(fake_mail, (err, response) => {
           if (err) res.status(400).send(err);
-          // console.log(response[0]);
+          console.log(response[0]);
           res.send(response[0]);
           // client.setex("currentMail", 900, JSON.stringify(response[0]));
         });
