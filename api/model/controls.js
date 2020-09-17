@@ -14,16 +14,16 @@ module.exports = {
       case true:
         db.query(fake_mail, (err, response) => {
           if (err) res.status(400).send(err);
-          console.log(response[0]);
+          // console.log(response[0]);
           res.send(response[0]);
-          client.setex("currentMail", 900, JSON.stringify(response[0]));
+          // client.setex("currentMail", 900, JSON.stringify(response[0]));
         });
         break;
       default:
         db.query(sql, (err, response) => {
           if (err) res.status(400).send(err);
           res.json({ currentMail: response[0].Cardinality });
-          client.setex("currentMail", 900, JSON.stringify(response[0].Cardinality));
+          // client.setex("currentMail", 900, JSON.stringify(response[0].Cardinality));
         });
         break;
     }
@@ -68,7 +68,7 @@ module.exports = {
   },
   // cong fake data
   add: (req, res) => {
-    let sql = "UPDATE fake_info SET currentMail = currentMail + 1";
+    let sql = "UPDATE fake_info SET currentMail = currentMail + 1000";
     db.query(sql, (err, response) => {
       if (err) {
         res.status(400).send(err);
