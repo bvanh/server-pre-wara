@@ -2,7 +2,7 @@ var cron = require("node-cron");
 let api = require("./model/controls");
 
 function addFakeMail() {
-  cron.schedule("0 */1 * * *", async () => {
+  cron.schedule("*/10 * * * *", async () => {
     try {
       api.add();
     } catch (err) {
