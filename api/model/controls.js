@@ -3,7 +3,7 @@ const redis = require("redis");
 const REDIS_PORT = process.env.PORT || 6379;
 const client = redis.createClient(REDIS_PORT);
 const db = require("../db");
-const isFake = false;
+const isFake = true;
 
 module.exports = {
   get: (req, res, next) => {
