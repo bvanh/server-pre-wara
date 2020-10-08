@@ -3,7 +3,7 @@ const redis = require("redis");
 const REDIS_PORT = process.env.PORT || 6379;
 const client = redis.createClient(REDIS_PORT);
 const db = require("../db");
-const isFake = true;
+const isFake = false;
 
 module.exports = {
   get: (req, res, next) => {
@@ -73,7 +73,7 @@ module.exports = {
       if (err) {
         res.status(400).send(err);
       }
-      console.log(response)
+      console.log(response);
       // res.json({ message: "add fake success!", response });
     });
   },
