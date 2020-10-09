@@ -41,6 +41,7 @@ module.exports = {
     });
   },
   create: (req, res) => {
+    let sql = "UPDATE fake_info SET currentMail = currentMail + 1";
     let { mail, phone } = req.body;
     db.query(
       "insert into info_register set ?",
@@ -62,6 +63,13 @@ module.exports = {
         res.json({
           message: "Gửi email thành công!",
           status: 200,
+        });
+        db.query(sql, (err, response) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(response);
+          // res.json({ message: "add fake success!", response });
         });
       }
     );
